@@ -1,0 +1,644 @@
+!<arch>
+//                                              188       `
+my_compute_power_rec.o/
+my_compute_square_root.o/
+my_find_prime_sup.o/
+my_sort_int_array.o/
+my_str_isalpha.o/
+my_str_islower.o/
+my_str_isprintable.o/
+my_str_isupper.o/
+my_strcapitalize.o/
+/0              1570791569  1000  1000  100664  394       `
+!<arch>
+//                                              24        `
+my_compute_power_rec.c/
+/0              1570790629  1000  1000  100755  242       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+int my_compute_power_rec(int nb, int p)
+{
+    if (p < 0)
+        return (0);
+    if (p == 0)
+        return (1);
+    else
+        return (nb * my_compute_power_rec(nb, p - 1));
+}
+/24             1570791569  1000  1000  100664  374       `
+!<arch>
+//                                              26        `
+my_compute_square_root.c/
+/0              1570790629  1000  1000  100755  219       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+int my_compute_square_root(int nb)
+{
+    int res = 1;
+
+    for (; res * res != nb; res++)
+        if (res > nb)
+            return (0);
+    return (res);
+}
+
+/50             1570791569  1000  1000  100664  370       `
+!<arch>
+//                                              22        `
+my_find_prime_sup.c/
+
+/0              1570790629  1000  1000  100755  220       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+int my_is_prime(int nb);
+
+int my_find_prime_sup(int nb)
+{
+    int prime = 0;
+
+    while (prime != 1)
+        prime = my_is_prime(nb++);
+    return (--nb);
+}
+my_getnbr.o/    1570791569  1000  1000  100664  834       `
+!<arch>
+my_getnbr.c/    1570790629  1000  1000  100755  765       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+int my_strlen(char const *str);
+
+int negapply(int neg, int value)
+{
+    if (neg % 2 == 1)
+        value = value * -1;
+    return (value);
+}
+
+int my_getnbr(char const *str)
+{
+    int value = 0;
+    int mul = 1;
+    int neg = 0;
+    int i = my_strlen(str) - 1;
+
+    for (; i >= 0; i--) {
+        if (str[i] == 45)
+            neg++;
+        if ((str[i] < 48 || str[i] > 57) && (str[i] != 43 && str[i] != 45)) {
+            mul = 1;
+            value = neg = 0;
+        } else if (str[i] != 43 && str[i] != 45) {
+            value = value + ((str[i] - 48) * mul);
+            mul *= 10;
+        }
+        if (value < 0)
+            return (0);
+    }
+    value = negapply(neg, value);
+    return (value);
+}
+my_is_prime.o/  1570791569  1000  1000  100664  294       `
+!<arch>
+my_is_prime.c/  1570790629  1000  1000  100755  225       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+int my_is_prime(int nb)
+{
+    if (nb <= 1)
+        return (0);
+    for (int c = 2; c < nb; c++)
+        if (nb % c == 0)
+            return (0);
+    return (1);
+}
+my_isanum.o/    1570791569  1000  1000  100664  286       `
+!<arch>
+my_isanum.c/    1570790629  1000  1000  100775  217       `
+/*
+** EPITECH PROJECT, 2019
+** delivery
+** File description:
+** my_isanum
+*/
+
+int my_isanum(char c)
+{
+    if ((c < '0' || c > '9') && (c < 'A' || c > 'Z') && (c < 'a' || c > 'z'))
+        return (1);
+    return (0);
+}
+my_isneg.o/     1570791569  1000  1000  100664  286       `
+!<arch>
+my_isneg.c/     1570790629  1000  1000  100755  217       `
+/*
+** EPITECH PROJECT, 2019
+** my_isneg
+** File description:
+** my_isneg
+*/
+
+void my_putchar(char c);
+
+int my_isneg(int n)
+{
+    if (n < 0)
+        my_putchar('N');
+    else
+        my_putchar('P');
+    return (0);
+}
+
+my_put_nbr.o/   1570791569  1000  1000  100664  764       `
+!<arch>
+my_put_nbr.c/   1570790629  1000  1000  100755  696       `
+/*
+** EPITECH PROJECT, 2019
+** my_put_nbr
+** File description:
+** my_put_nbr
+*/
+
+void my_putchar(char c);
+
+int condition_check(int mul, int nb)
+{
+    if (nb == 0)
+        my_putchar('0');
+    if (mul != 1000000000)
+        mul /= 10;
+    return (mul);
+}
+
+int my_put_nbr(int nb)
+{
+    int b = nb;
+    int mul = 1;
+
+    if (nb < 0)
+        my_putchar('-');
+    for (; b != 0; b /= 10) {
+        mul *= 10;
+        if (mul == 1000000000)
+            b = 0;
+    }
+    mul = condition_check(mul, nb);
+    while (mul > 0) {
+        if (nb < 0)
+            my_putchar(((nb / mul) % 10) * -1 + 48);
+        else
+            my_putchar(nb / mul % 10 + 48);
+        mul = mul / 10;
+    }
+    return (0);
+}
+my_putchar.o/   1570791569  1000  1000  100664  216       `
+!<arch>
+my_putchar.c/   1570790629  1000  1000  100755  148       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_putchar
+*/
+
+#include <unistd.h>
+
+void my_putchar(char c)
+{
+    write(1, &c, 1);
+}my_putstr.o/    1570791569  1000  1000  100664  282       `
+!<arch>
+my_putstr.c/    1570790629  1000  1000  100755  214       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+void my_putchar(char c);
+
+int my_putstr(char const *str)
+{
+    for (int i = 0; str[i] != 0; i++) {
+        my_putchar(str[i]);
+    }
+    return (0);
+}
+my_revstr.o/    1570791569  1000  1000  100664  506       `
+!<arch>
+my_revstr.c/    1570790629  1000  1000  100755  438       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_revstr
+*/
+
+int my_strlen(char const *str)
+{
+    int i = 0;
+
+    for (; str[i] != 0; i++);
+    return (i);
+}
+
+int my_swap_char(char *a, char *b)
+{
+    char c = *a;
+    *a = *b;
+    *b = c;
+    return (0);
+}
+
+char *my_revstr(char *str)
+{
+    int b = my_strlen(str) - 1;
+    int a = 0;
+
+    for (; a < b; a++, b--)
+        my_swap_char(str + a, str + b);
+    return (str);
+}my_showmem.o/   1570791569  1000  1000  100664  208       `
+!<arch>
+my_showmem.c/   1570790629  1000  1000  100755  140       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_showmem
+*/
+
+int my_showmem(char const *str, int size)
+{
+    return (0);
+}my_showstr.o/   1570791569  1000  1000  100664  198       `
+!<arch>
+my_showstr.c/   1570790629  1000  1000  100755  130       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_showstr
+*/
+
+int my_showstr(char const *str)
+{
+    return (0);
+}/71             1570791569  1000  1000  100664  574       `
+!<arch>
+//                                              22        `
+my_sort_int_array.c/
+
+/0              1570790629  1000  1000  100755  424       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_sort_int_array
+*/
+
+void my_swap(int *a, int *b);
+
+void my_sort_int_array(int *array, int size)
+{
+    int check = 1;
+    while (check != 0) {
+        check = 0;
+        for (int i = 0; i < size - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                check = 1;
+                my_swap(array + i, array + i + 1);
+            }
+        }
+    }
+}/92             1570791569  1000  1000  100664  284       `
+!<arch>
+//                                              18        `
+my_str_isalpha.c/
+/0              1570790629  1000  1000  100755  138       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_str_isalpha
+*/
+
+int my_str_isalpha(char const *str)
+{
+    return (0);
+}/110            1570791569  1000  1000  100664  284       `
+!<arch>
+//                                              18        `
+my_str_islower.c/
+/0              1570790629  1000  1000  100755  138       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_str_islower
+*/
+
+int my_str_islower(char const *str)
+{
+    return (0);
+}my_str_isnum.o/ 1570791569  1000  1000  100664  202       `
+!<arch>
+my_str_isnum.c/ 1570790629  1000  1000  100755  134       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_str_isnum
+*/
+
+int my_str_isnum(char const *str)
+{
+    return (0);
+}/128            1570791569  1000  1000  100664  296       `
+!<arch>
+//                                              22        `
+my_str_isprintable.c/
+/0              1570790629  1000  1000  100755  146       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_str_isprintable
+*/
+
+int my_str_isprintable(char const *str)
+{
+    return (0);
+}/150            1570791569  1000  1000  100664  284       `
+!<arch>
+//                                              18        `
+my_str_isupper.c/
+/0              1570790629  1000  1000  100755  138       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_str_isupper
+*/
+
+int my_str_isupper(char const *str)
+{
+    return (0);
+}/168            1570791569  1000  1000  100664  288       `
+!<arch>
+//                                              20        `
+my_strcapitalize.c/
+/0              1570790629  1000  1000  100755  140       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strcapitalize
+*/
+
+char *my_strcapitalize(char *str)
+{
+    return (str);
+}my_strcat.o/    1570791569  1000  1000  100664  378       `
+!<arch>
+my_strcat.c/    1570790629  1000  1000  100755  309       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strcat
+*/
+
+int my_strlen(char *str);
+
+char *my_strcat(char *dest, char const *src)
+{
+    int len = my_strlen(dest);
+    int curs = 0;
+
+    for (int i = 0; src[i] != 0; i++)
+        dest[len++] = src[i];
+    dest[len] = 0;
+    return (dest);
+}
+my_strcmp.o/    1570791569  1000  1000  100664  302       `
+!<arch>
+my_strcmp.c/    1570790629  1000  1000  100755  234       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strcmp
+*/
+
+int my_strcmp(char const *s1, char const *s2)
+{
+    int i = 0;
+    for (; s1[i] == s2[i] && (s1[i] != 0 && s2[i] != 0) ; i++);
+    return (s1[i] - s2[i]);
+}my_strcpy.o/    1570791569  1000  1000  100664  302       `
+!<arch>
+my_strcpy.c/    1570790629  1000  1000  100755  233       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strcpy
+*/
+
+char *my_strcpy(char *dest, char const *src)
+{
+    int i = 0;
+
+    for (; src[i] != 0; i++)
+        dest[i] = src[i];
+    dest[i] = 0;
+    return (dest);
+}
+my_strlen.o/    1570791569  1000  1000  100664  228       `
+!<arch>
+my_strlen.c/    1570790629  1000  1000  100755  160       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+int my_strlen(char const *str)
+{
+    int i = 0;
+
+    for (; str[i] != 0; i++);
+    return (i);
+}
+my_strlowcase.o/1570791570  1000  1000  100664  316       `
+!<arch>
+my_strlowcase.c/1570790629  1000  1000  100755  248       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strupcase
+*/
+
+char *my_strlowcase(char *str)
+{
+    for (int i = 0; str[i] != 0; i++) {
+        if (str[i] > 'A' && str[i] < 'Z' )
+            str[i] += 32;
+    }
+    return (str);
+}my_strncat.o/   1570791570  1000  1000  100664  384       `
+!<arch>
+my_strncat.c/   1570790629  1000  1000  100755  315       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strcat
+*/
+
+int my_strlen(char *str);
+
+char *my_strncat(char *dest, char const *src, int nb)
+{
+    int len = my_strlen(dest);
+
+    for (int  i = 0; i < nb && src[i] != 0; i++)
+        dest[len++] = src[i];
+    dest[len + 1] = 0;
+    return (dest);
+}
+my_strncmp.o/   1570791570  1000  1000  100664  322       `
+!<arch>
+my_strncmp.c/   1570790629  1000  1000  100755  253       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strncmp
+*/
+
+int my_strncmp(char const *s1, char const *s2, int n)
+{
+    int i = 0;
+    for (; (s1[i] == s2[i] && (s1[i] != 0 && s2[i] != 0)) && i < n; i++);
+    return (s1[i] - s2[i]);
+}
+my_strncpy.o/   1570791570  1000  1000  100664  346       `
+!<arch>
+my_strncpy.c/   1570790629  1000  1000  100755  277       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strncpy
+*/
+
+char *my_strncpy(char *dest, char const *src, int n)
+{
+    int i = 0;
+
+    for (; i < n; i++) {
+        dest[i] = src[i];
+        if (src[i] == 0)
+            dest[i] = 0;
+    }
+    return (dest);
+}
+my_strstr.o/    1570791570  1000  1000  100664  656       `
+!<arch>
+my_strstr.c/    1570790629  1000  1000  100755  587       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strstr
+*/
+
+int check(char *str, char const *to_find, int curs)
+{
+    for (int x = 0; to_find[x] != 0; x++) {
+        if (str[curs++] != to_find[x])
+            return (0);
+    }
+    return (1);
+}
+
+char *my_strstr(char *str, char const *to_find)
+{
+    int match = 1;
+    int curs = 0;
+
+    for (int i = 0; str[i] !=  0; i++) {
+        if (str[i] == to_find[0]){
+            if (check(str, to_find, i) == 1)
+                return (str + i);
+        }
+    }
+    if (to_find[0] != 0)
+        return (0);
+    return (str);
+}
+my_strupcase.o/ 1570791570  1000  1000  100664  316       `
+!<arch>
+my_strupcase.c/ 1570790629  1000  1000  100755  247       `
+/*
+** EPITECH PROJECT, 2019
+** Starship
+** File description:
+** my_strupcase
+*/
+
+char *my_strupcase(char *str)
+{
+    for (int i = 0; str[i] != 0; i++) {
+        if (str[i] > 'a' && str[i] < 'z' )
+            str[i] -= 32;
+    }
+    return (str);
+}
+my_swap.o/      1570791570  1000  1000  100664  206       `
+!<arch>
+my_swap.c/      1570790629  1000  1000  100755  137       `
+/*
+** EPITECH PROJECT, 2019
+** a
+** File description:
+** a
+*/
+
+void my_swap(int *a, int *b)
+{
+    int c = *a;
+    *a = *b;
+    *b = c;
+}
+

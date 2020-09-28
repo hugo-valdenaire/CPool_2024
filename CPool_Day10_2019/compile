@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gcc *.c -g -Wextra -c -I ./include/
+gcc *.o -L ./lib/my -o program -lmy
+find . -name '*~' -delete -o -name "*.o" -delete
